@@ -4,6 +4,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{{-- "Add to home screen" markup --}}
+    <link rel="manifest" href="homescreen-manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="/img/app-icon-192x192.png">
+
 	<title>Goals Dashboard</title>
 
 	<link href="/css/app.css" rel="stylesheet">
