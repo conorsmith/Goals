@@ -144,17 +144,17 @@ class ProgressCalculationService
 
     private function runStrategy()
     {
-        $this->exerciseStrategy();
+        $this->exerciseStrategy('running');
     }
 
     private function walkStrategy()
     {
-        $this->exerciseStrategy();
+        $this->exerciseStrategy('walking');
     }
 
-    private function exerciseStrategy()
+    private function exerciseStrategy($sport)
     {
-        $workouts = Workout::all();
+        $workouts = Workout::where('sport', $sport)->get();
 
         $this->annualTotal = $workouts->reduce(function ($total, $workout)
         {
