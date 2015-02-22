@@ -28,8 +28,26 @@ class LogExerciseController extends Controller {
 	 */
 	public function store(Requests\Log\ExerciseRequest $request, $sport)
 	{
-        $file = $request->file('workout_file');
+        $files = $request->file('workout_file');
+        $messages = [];
 
+        foreach ($files as $file) {
+            try {
+                $workout = $this->processWorkoutFile($file, $sport);
+                $messages[] = "Logged $sport workout of " . $workout->distance . "km for " . $workout->exercised_at->format('Y-m-d') . ".";
+            } catch (\DomainException $e) {
+                $messages[] = "Error: " . $file->getClientOriginalName() . " :: " . $e->getMessage();
+            }
+        }
+
+        Event::fire(new ActivityWasLogged($this->mapSportToGoalSlug($sport)));
+
+        return redirect()->route('dashboard')
+            ->with('message', $messages);
+	}
+
+    private function processWorkoutFile($file, $sport)
+    {
         if ($file->getClientOriginalExtension() !== 'tcx') {
             throw new \DomainException("The data must be in a .tcx workout file.");
         }
@@ -48,11 +66,8 @@ class LogExerciseController extends Controller {
 
         $workout->save();
 
-        Event::fire(new ActivityWasLogged($this->mapSportToGoalSlug($sport)));
-
-        return redirect()->route('dashboard')
-            ->with('message', "Logged $sport workout of " . $workout->distance . "km for " . $workout->exercised_at->format('Y-m-d') . ".");
-	}
+        return $workout;
+    }
 
     private function checkSport($workoutData, $sport)
     {

@@ -5,7 +5,15 @@
 	<div class="row">
 		<div class="col-md-12">
 		    @if (Session::has('message'))
-		        <div class="alert alert-success">{{ Session::get('message') }}</div>
+		        @if (is_array(Session::get('message')))
+		            <div class="alert alert-success">
+		                @foreach (Session::get('message') as $message)
+		                    <p>{{ $message }}</p>
+		                @endforeach
+		            </div>
+		        @else
+		            <div class="alert alert-success">{{ Session::get('message') }}</div>
+		        @endif
 		    @endif
 		    @if (!$has_access_token)
 		        <div class="alert alert-danger">The application does not have an access token for the Google Drive API. <a href="{{ route('oauth.trigger', ['google']) }}" class="alert-link">Click to authenticate</a>.</div>
