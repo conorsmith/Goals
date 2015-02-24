@@ -14,7 +14,7 @@ class OAuthController extends Controller {
 
         if (Request::has('code')) {
             $accessToken = $client->authenticate(Request::get('code'));
-            Cache::forever('google.access_token', $accessToken);
+            Cache::put('google.access_token', $accessToken, 60);
         }
 
         return redirect(Config::get('app.url') . route('dashboard', [], false));

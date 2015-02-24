@@ -76,7 +76,7 @@ class ProgressCalculationService
                 ->orderBy('measured_at', 'desc')->first();
 
             if (is_null($weight)) {
-                $this->monthlyTotals[$i] = $mostRecentWeight->measurement;
+                $this->monthlyTotals[$i] = 0;
             } else {
                 $this->monthlyTotals[$i] = $weight->measurement;
             }

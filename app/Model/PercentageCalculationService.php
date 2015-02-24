@@ -62,6 +62,10 @@ class PercentageCalculationService
 
     private function weighMonthlyStrategy($monthIndex, $total)
     {
+        if ($total === 0) {
+            return 0;
+        }
+        
         $startingWeight = 94;
         $monthlyTarget = ($startingWeight - $this->goal->value) * cal_days_in_month(CAL_GREGORIAN, $monthIndex, 2015) / 365;
         return round(($startingWeight - $total) / $monthlyTarget * 100, 1);

@@ -16,7 +16,7 @@
 		        @endif
 		    @endif
 		    @if (!$has_access_token)
-		        <div class="alert alert-danger">The application does not have an access token for the Google Drive API. <a href="{{ route('oauth.trigger', ['google']) }}" class="alert-link">Click to authenticate</a>.</div>
+		        <div class="alert alert-warning">The application does not have an access token for the Google Drive API. <a href="{{ route('oauth.trigger', ['google']) }}" class="alert-link">Click to authenticate</a>.</div>
 		    @endif
 			<div class="panel panel-default">
 				<div class="panel-heading">Log Goal Activities</div>
