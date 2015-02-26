@@ -20,7 +20,13 @@ class ProgressMeasurement
 
     public function getValue()
     {
-        return $this->value;
+        if ($this->value == intval($this->value)) {
+            return number_format($this->value, 0);
+        } else if ($this->value * 10 == intval($this->value * 10)) {
+            return number_format($this->value, 1);
+        } else {
+            return number_format($this->value, 2);
+        }
     }
 
     public function getPeriod()
