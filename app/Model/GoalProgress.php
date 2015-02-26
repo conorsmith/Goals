@@ -46,7 +46,7 @@ class GoalProgress
             //$data[] = $measurement->getPercentage();
             $data[] = [
                 'name' => $measurement->getValue(),
-                'y' => $measurement->getPercentage()
+                'y' => (float) $measurement->getPercentage()
             ];
         }
 
