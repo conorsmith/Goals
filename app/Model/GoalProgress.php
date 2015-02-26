@@ -37,4 +37,19 @@ class GoalProgress
     {
         return $this->monthMeasurements;
     }
+
+    public function getMonthlyProgressAsJson()
+    {
+        $data = [];
+
+        foreach ($this->monthMeasurements as $measurement) {
+            //$data[] = $measurement->getPercentage();
+            $data[] = [
+                'name' => $measurement->getValue(),
+                'y' => $measurement->getPercentage()
+            ];
+        }
+
+        return json_encode($data);
+    }
 }
