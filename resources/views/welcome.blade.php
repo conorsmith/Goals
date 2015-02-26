@@ -1,6 +1,6 @@
 <html>
 	<head>
-	    <title>Goals</title>
+	    <title>Goals 2015</title>
 
 	    <link href="/css/app.css" rel="stylesheet">
 		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
@@ -8,15 +8,15 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="page-header">
-				<h1>Goals</h1>
+			<div class="page-header" style="text-align: center;">
+				<h1>Goals 2015</h1>
 			</div>
 			<div>
 			    @foreach ($goals as $goal)
 			        <div class="row" style="margin-bottom: 20px;">
 			            <div class="col-sm-2" style="text-align: center;">
-			                <div><img src="http://placehold.it/100x100" class="img-circle"></div>
-			                <div>{{ $goal->getName() }}</div>
+			                <div style="height: 120px;"><img src="http://placehold.it/120x120" class="img-circle"></div>
+			                <div style="margin-top: 20px; font-size: 18px; font-weight: bold;">{{ $goal->getName() }}</div>
 			            </div>
 			            <div class="col-sm-8">
 			                <div class="progress" style="height: 60px; line-height: 60px; text-align: left; font-weight: bold;">
@@ -32,29 +32,10 @@
                                 </div>
 			                </div>
 			                <div class="js__month-chart" data-progress="{{ $goal->getProgress()->getMonthlyProgressAsJson() }}"></div>
-			                {{--
-			                <div class="row">
-			                    @foreach ($goal->getProgress()->getMeasurementsForEachMonth() as $measurement)
-                                    <div class="col-sm-1">
-                                        <div>
-                                            <div class="progress" style="height: 80px;">
-                                                <div class="progress-bar progress-bar-info" style="width: 100%; height: {{ $measurement->getPercentage() }}%;"></div>
-                                            </div>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            {{ $measurement->getValue() }}
-                                        </div>
-                                        <div style="text-align: center;">
-                                            {{ $measurement->getPeriod() }}
-                                        </div>
-                                    </div>
-                                @endforeach
-			                </div>
-			                --}}
 			            </div>
 			            <div class="col-sm-2" style="text-align: center;">
-			                <div>{{ number_format($goal->getValue()) }}</div>
-			                <div>{{ $goal->getUnit() }}</div>
+			                <div style="font-size: 48px; font-weight: bold;">{{ number_format($goal->getValue()) }}</div>
+			                <div style="font-size: 16px; line-height: 12px;">{{ $goal->getUnit() }}</div>
 			            </div>
 			        </div>
 			        <hr>

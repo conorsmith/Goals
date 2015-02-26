@@ -37,7 +37,7 @@ $(function() {
                 },
                 plotLines: [
                     {
-                        color: 'red',
+                        color: '#094D88',
                         value: 100,
                         width: 1,
                         zIndex: 5
@@ -66,7 +66,16 @@ $(function() {
                         formatter: function () {
                             return this.point.name == 0 ? '' : this.point.name;
                         },
+                        crop: false,
+                        overflow: "none",
                         zIndex: 10
+                    }
+                },
+                series: {
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
                     }
                 }
             }
