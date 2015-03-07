@@ -67,7 +67,20 @@ class PercentageCalculationService
         }
 
         $startingWeight = 94;
-        $monthlyTarget = ($startingWeight - $this->goal->value) * cal_days_in_month(CAL_GREGORIAN, $monthIndex, 2015) / 365;
-        return round(($startingWeight - $total) / $monthlyTarget * 100, 1);
+        $overallDifference = $startingWeight - $this->goal->value;
+        $monthlyTarget = $overallDifference * cal_days_in_month(CAL_GREGORIAN, $monthIndex, 2015) / 365;
+
+        $monthlyStartingWeight = 94;
+        for ($i = 1; $i < $monthIndex; $i++) {
+            $monthlyStartingWeight -= $overallDifference * cal_days_in_month(CAL_GREGORIAN, $i, 2015) / 365;
+        }
+
+        $monthlyProgress = round(($monthlyStartingWeight - $total) / $monthlyTarget * 100, 1);
+
+        if ($monthlyProgress < 0) {
+            return 0;
+        }
+
+        return $monthlyProgress;
     }
 }
