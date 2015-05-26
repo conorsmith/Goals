@@ -76,3 +76,18 @@ Route::group([
         'only' => ['create', 'store'],
     ]);
 });
+
+Route::get('records', [
+    'as' => 'records',
+    'uses' => 'DashboardController@records',
+]);
+
+Route::group([
+    'prefix' => 'records'
+], function ()
+{
+    Route::get('exercise/{sport}', [
+        'as' => 'records.exercise',
+        'uses' => 'Records\ExerciseController@index',
+    ]);
+});

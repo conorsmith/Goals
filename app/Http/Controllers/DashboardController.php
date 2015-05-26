@@ -39,4 +39,9 @@ class DashboardController extends Controller {
         ]);
 	}
 
+    public function records()
+    {
+        return view('records.index');
+    }
+
 }
